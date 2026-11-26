@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PC-G850 / PC-E200 Emulator</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <h1>PC-G850の同等機PC-E200 エミュレータ <small>(ROM不要)</small></h1>
+  <div class="bar">
+    <label>モード <select id="mode">
+      <option value="basic">BASIC (ROM不要)</option>
+      <option value="z80">機械語 Z80 (ROM不要)</option>
+      <option value="rom">ROMエミュレーション(実験)</option>
+    </select></label>
+    <label id="speedWrap">速度 <select id="speed">
+      <option value="3000">実機風</option>
+      <option value="20000">高速</option>
+      <option value="Infinity">最速</option>
+    </select></label>
+    <label id="modelWrap" hidden>機種 <select id="model">
+      <option value="pcg850v">PC-G850V</option>
+      <option value="pce220">PC-E220</option>
+      <option value="pcg815">PC-G815</option>
+    </select></label>
+    <label id="romWrap" class="btn" hidden>ROMを読み込む <input id="rom" type="file" multiple hidden></label>
+    <button id="reset">リセット</button>
+    <span id="status"></span>
+  </div>
+  <div class="device">
+    <div class="badge">POCKET COMPUTER</div>
+    <div class="lcdwrap"><canvas id="lcd" width="144" height="48"></canvas></div>
+    <div id="calcKeys"></div>
+    <div id="calcInfo" class="note"></div>
+    <div id="keys"></div>
+  </div>
+
+  <section id="z80Pane" hidden>
+    <h2>機械語プログラム <small>(ROM不要)</small></h2>
+    <div class="bar">
+      <label class="btn">HEX/BINを開く <input id="z80File" type="file" accept=".hex,.bin,.txt" hidden></label>
+      <label>開始アドレス(16進) <input id="z80Entry" value="100" size="5"></label>
+      <label>クロック(kHz) <input id="z80Clock" value="8000" size="6"></label>
+      <label>音声 <select id="z80Audio">
+        <option value="mono">ブザー(モノ・11ピン#7)</option>
+        <option value="stereo">リンク端子(L=#4 / R=#5)</option>
+        <option value="off">オフ</option>
+      </select></label>
+      <label>LCD階調 <select id="z80Scales"><option value="1">1 (なし)</option><option value="2">2</option><option value="4" selected>4</option></select></label>
+      <label>更新(Hz) <input id="z80Refresh" value="120" size="4"></label>
+      <button id="z80Run">実行</button>
+    </div>
+    <p class="note" id="z80Info">HEX または BIN を読み込んで「実行」を押してください。ROM は使わず、64KB すべてを RAM として扱います(実機の MON → G100 に相当)。ESC = ON キー。ファイルはこの画面にドラッグ&amp;ドロップでも読み込めます。</p>
+  </section>
+
+  <section id="progPane">
+    <h2>プログラム</h2>
+    <textarea id="prog" spellcheck="false" rows="10" placeholder="10 PRINT &quot;HELLO&quot;&#10;20 END"></textarea>
+    <div class="bar">
+      <button id="toMem">メモリへ読み込む</button>
+      <button id="fromMem">メモリから取得</button>
+      <button id="runBtn">RUN</button>
+      <button id="breakBtn">BREAK</button>
+      <button id="saveFile">ファイルへ保存</button>
+      <label class="btn">ファイルを開く <input id="openFile" type="file" accept=".bas,.txt" hidden></label>
+      <label>サンプル <select id="sample"><option value="">選択…</option></select></label>
+    </div>
+    <p class="note">プログラムは行番号付きテキスト。画面上で直接入力することもできます。PCキーボード: Esc = BREAK。ROMは使わず、BASICインタプリタをJavaScriptで実装しています。</p>
+  </section>
+</main>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
