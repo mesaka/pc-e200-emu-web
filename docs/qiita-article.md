@@ -17,8 +17,8 @@ https://note.com/lain2772/n/n1141a5c91cd6 の記事を読んで、自分も所�
 
 **ROM なし**・ブラウザだけで動く形にして、その上で動く **マインスイーパー (BASIC, 75行)** も書きました。
 
+- エミュレータ本体: https://github.com/mesaka/pc-e200-emu-web (MIT)
 - マインスイーパー: https://github.com/mesaka/minesweeper-emu (MIT)
-<!-- エミュレータ本体のリポジトリ(pc-e200-emu)を公開するなら、ここにリンクを追加 -->
 
 ### 使用させていただいたもの
 
