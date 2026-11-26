@@ -20,7 +20,7 @@ npm test                          # 下記すべて (ZEXDOC は tests/fixtures/z
 node tests/basic.test.mjs         # BASIC インタプリタ / 関数電卓
 node tests/machine.test.mjs       # ROMモードの配線テスト(合成ROM)
 node tests/iocs.test.mjs          # システムコールのエミュレーション
-GAMES_DIR=<dir> node tests/games.test.mjs   # 実ゲーム5本 (別途用意したファイル。無ければスキップ)
+node tests/minesweeper.test.mjs <minesweeper.bas>   # マインスイーパー(.bas) の動作 (ファイルを指定。無ければスキップ)
 ```
 
 ## デプロイ

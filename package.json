@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node tests/basic.test.mjs && node tests/machine.test.mjs && node tests/iocs.test.mjs && node tests/games.test.mjs && node tests/zex.mjs",
+    "test": "node tests/basic.test.mjs && node tests/machine.test.mjs && node tests/iocs.test.mjs && node tests/minesweeper.test.mjs && node tests/zex.mjs",
     "dev": "wrangler pages dev web",
     "deploy": "wrangler pages deploy web"
   }
