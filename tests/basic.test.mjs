@@ -24,6 +24,8 @@ t('float sum', '10 PRINT 0.1+0.2=0.3', '1');
 t('strings', '10 A$="HELLO":PRINT LEFT$(A$,2);MID$(A$,2,3);RIGHT$(A$,1)', 'HEELLO'.replace('HEELLO', 'HEELLO'));
 t('for/next', '10 FOR I=1 TO 5:S=S+I:NEXT I:PRINT S', '15');
 t('step neg', '10 FOR I=3 TO 1 STEP -1:PRINT I;:NEXT:PRINT', '321');
+t('next with several variables', '10 FOR I=1 TO 3\n20 FOR J=1 TO 2\n30 PRINT I*J;\n40 NEXT J,I\n50 PRINT "X"', '122436X');
+t('next separate lines', '10 FOR I=1 TO 3\n20 FOR J=1 TO 2\n30 PRINT I*J;\n40 NEXT J\n50 NEXT I\n60 PRINT "X"', '122436X');
 t('gosub', '10 GOSUB 100:PRINT "B":END\n100 PRINT "A":RETURN', 'A\nB');
 t('if else', '10 A=5:IF A>3 THEN PRINT "BIG" ELSE PRINT "SMALL"\n20 IF A<3 THEN PRINT "X" ELSE PRINT "Y"', 'BIG\nY');
 t('if then line', '10 IF 1=1 THEN 30\n20 PRINT "NO"\n30 PRINT "YES"', 'YES');
