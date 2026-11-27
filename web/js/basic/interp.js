@@ -691,13 +691,17 @@ export class Interp {
         return;
       }
       case 'NEXT': {
-        let f;
-        if (s.vars.length) { const key = s.vars[0]; const k = this.forStack.map(x => x.key).lastIndexOf(key); if (k < 0) fail('NEXT'); this.forStack.length = k + 1; f = this.forStack[k]; }
-        else f = this.forStack[this.forStack.length - 1];
-        if (!f) fail('NEXT');
-        const v = round13(f.lv.get(this) + f.step); f.lv.set(this, v);
-        if (f.step >= 0 ? v <= f.end : v >= f.end) { this.line = f.line; this.idx = f.idx; }
-        else this.forStack.pop();
+        // NEXT J,I は NEXT J : NEXT I と同じ。内側のループが終わったときだけ、次の変数へ進む
+        const keys = s.vars.length ? s.vars : [null];
+        for (const key of keys) {
+          let f;
+          if (key !== null) { const k = this.forStack.map(x => x.key).lastIndexOf(key); if (k < 0) fail('NEXT'); this.forStack.length = k + 1; f = this.forStack[k]; }
+          else f = this.forStack[this.forStack.length - 1];
+          if (!f) fail('NEXT');
+          const v = round13(f.lv.get(this) + f.step); f.lv.set(this, v);
+          if (f.step >= 0 ? v <= f.end : v >= f.end) { this.line = f.line; this.idx = f.idx; return; }
+          this.forStack.pop();
+        }
         return;
       }
       case 'END': this.finish(); return;
